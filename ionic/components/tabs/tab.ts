@@ -92,7 +92,7 @@ export class Tab extends NavController {
   private _panelId: string;
   private _btnId: string;
   private _loaded: boolean;
-  private _loadTmr: any;
+  private _loadTmr: number;
 
   /**
    * @private

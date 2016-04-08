@@ -113,7 +113,7 @@ export class Nav extends NavController {
   private _hasInit: boolean = false;
 
   constructor(
-    @Optional() parent: NavController,
+    @Optional() hostNavCtrl: NavController,
     @Optional() viewCtrl: ViewController,
     app: IonicApp,
     config: Config,
@@ -124,22 +124,13 @@ export class Nav extends NavController {
     zone: NgZone,
     renderer: Renderer
   ) {
-    super(parent, app, config, keyboard, elementRef, 'contents', compiler, viewManager, zone, renderer);
+    super(hostNavCtrl, app, config, keyboard, elementRef, 'contents', compiler, viewManager, zone, renderer);
 
     if (viewCtrl) {
       // an ion-nav can also act as an ion-page within a parent ion-nav
       // this would happen when an ion-nav nests a child ion-nav.
       viewCtrl.setContent(this);
       viewCtrl.setContentRef(elementRef);
-    }
-
-    if (parent) {
-      // this Nav has a parent Nav
-      parent.registerChildNav(this);
-
-    } else if (app) {
-      // this is the root navcontroller for the entire app
-      this._app.setRootNav(this);
     }
   }
 
